@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Basic annotations.
 
-a type-annotated function add that takes a float a and a float b 
+a type-annotated function add that takes a float a and a float b
 as arguments and returns their sum as a float.
 
 Functions:
@@ -19,6 +19,7 @@ def add(a: float, b: float) -> float:
             b (float): another number float
 
         Returns:
-            number float of the sum of a and b
+            float_sum (float): number float of the sum of a and b
     """
-    return a + b
+    float_sum = a + b
+    return float_sum
