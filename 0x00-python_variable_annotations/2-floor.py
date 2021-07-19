@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from typing import NewType
 """Basic annotations
 
 a type-annotated function floor which takes a float n
@@ -21,7 +20,4 @@ def floor(n: float) -> int:
             the floor of the int.
     """
     number = int(n)
-    if number >= 0:
-        return number
-    else:
-        return int(number) - 1
+    return number
