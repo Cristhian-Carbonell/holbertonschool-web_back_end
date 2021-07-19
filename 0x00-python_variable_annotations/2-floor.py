@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Basic annotations
+
+a type-annotated function floor which takes a float n
+as argument and returns the floor of the float.
+
+Functions:
+    floor(n: float) -> float
+"""
+
+
+def floor(n: float) -> float:
+    """
+    Returns the floor of the float.
+
+        Parameters:
+            n (float): a number float
+
+        Returns:
+            the floor of the int.
+    """
+    return int(n)
