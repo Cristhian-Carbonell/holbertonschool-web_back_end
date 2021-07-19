@@ -7,9 +7,10 @@ as argument and returns their sum as a float.
 Fuctions:
     sum_list(inpu_list: list[float]) -> float
 """
+from typing import List
 
 
-def sum_list(input_list: list[float]) -> float:
+def sum_list(input_list: List[float]) -> float:
     """
     returns their sum as a float.
 
