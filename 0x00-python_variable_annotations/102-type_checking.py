@@ -18,7 +18,7 @@ zoom_2x = zoom_array(array)
 
 zoom_3x = zoom_array(array, 3.0)
 """
-from typing import Tuple, List
+from typing import Tuple, List, Union, Any
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
