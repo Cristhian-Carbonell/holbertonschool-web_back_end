@@ -11,7 +11,7 @@ Functions:
 
 def floor(n: float) -> int:
     """
-    Returns the floor of the int.
+    Returns the floor of the float.
 
         Parameters:
             n (float): a number float
