@@ -7,15 +7,14 @@ waits for a random delay between 0 and max_delay (included and
 float value) seconds and eventually returns it.
 
 Function:
-    async def wait_random(max_delay: int) -> int:
+    async def wait_random(max_delay: int) -> float:
 """
 
 import asyncio
 import random
-import time
 
 
-async def wait_random(max_delay: int = 10) -> int:
+async def wait_random(max_delay: int = 10) -> float:
     """
     return seconds
 
@@ -25,8 +24,6 @@ async def wait_random(max_delay: int = 10) -> int:
         Return:
         seconds 
     """
-    seconds = time.perf_counter()
-    i = random.randint(0, max_delay)
+    i = max_delay * random.random()
     await asyncio.sleep(i)
-    elapsed = time.perf_counter() - seconds
-    return elapsed
+    return i
