@@ -50,8 +50,9 @@ class FIFOCache(BaseCaching):
             corresponding key
         """
         if key is not None and item is not None:
-            if len(self.cache_data) == BaseCaching.MAX_ITEMS:
-                if key not in self.cache_data:
+            self.cache_data[key] = item
+            
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                     for value in range(len(self.cache_data)):
                         for keys in self.cache_data:
                             if value == FIFOCache.index:
@@ -59,9 +60,8 @@ class FIFOCache(BaseCaching):
                                 break
 
                     FIFOCache.index += 1
-                if FIFOCache.index == 3:
-                    FIFOCache.index = 0
-            self.cache_data[key] = item
+            if FIFOCache.index == 3:
+                FIFOCache.index = 0
 
     def get(self, key):
         """
