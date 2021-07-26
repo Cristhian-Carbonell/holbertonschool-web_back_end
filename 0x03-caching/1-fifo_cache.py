@@ -51,13 +51,13 @@ class FIFOCache(BaseCaching):
         """
         if key is not None and item is not None:
             self.cache_data[key] = item
-            
+
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                    for value in range(len(self.cache_data)):
-                        for keys in self.cache_data:
-                            if value == FIFOCache.index:
-                                self.cache_data.pop(keys)
-                                break
+                for value in range(len(self.cache_data)):
+                    for keys in self.cache_data:
+                        if value == FIFOCache.index:
+                            self.cache_data.pop(keys)
+                            break
 
                     FIFOCache.index += 1
             if FIFOCache.index == 3:
