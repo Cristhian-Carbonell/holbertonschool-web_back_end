@@ -53,11 +53,11 @@ class FIFOCache(BaseCaching):
         if key is not None and item is not None:
             if key not in self.new_key:
                 self.new_key.append(key)
-                
+
             if len(self.new_key) > BaseCaching.MAX_ITEMS:
-               discard = self.new_key.pop(0)
-               del self.cache_data[discard]
-               print("DISCARD: {}".format(discard))
+                discard = self.new_key.pop(0)
+                del self.cache_data[discard]
+                print("DISCARD: {}".format(discard))
 
             self.cache_data[key] = item
 
