@@ -20,8 +20,7 @@ class LIFOCache(BaseCaching):
     Parametres
     ----------
     None
-    
-    
+
     Methods
     -------
     put(key, item)
@@ -36,6 +35,7 @@ class LIFOCache(BaseCaching):
         """
         super().__init__()
         self.new_key = []
+        self.index = 3
 
     def put(self, key, item):
         """
@@ -50,15 +50,17 @@ class LIFOCache(BaseCaching):
             corresponding key
         """
         if key is not None and item is not None:
+            self.cache_data[key] = item
+
             if key not in self.new_key:
                 self.new_key.append(key)
 
             if len(self.new_key) > BaseCaching.MAX_ITEMS:
-                discard = self.new_key.pop(3)
+                discard = self.new_key.pop(self.index)
                 del self.cache_data[discard]
                 print("DISCARD: {}".format(discard))
-
-            self.cache_data[key] = item
+            if key in self.new_key:
+                self.index = self.new_key.index(key)
 
     def get(self, key):
         """
