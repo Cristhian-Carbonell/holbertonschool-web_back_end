@@ -67,7 +67,7 @@ class BasicCache(BaseCaching):
             Dictionary value if it finds the key, if not none
         """
         string_value = None
-        if key is None and key in self.cache_data:
+        if key is None or key in self.cache_data:
             for keys, values in self.cache_data.items():
                 if key == keys:
                     string_value = values
