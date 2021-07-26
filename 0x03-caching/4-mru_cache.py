@@ -53,12 +53,11 @@ class MRUCache(BaseCaching):
                 self.new_key.append(key)
 
             if len(self.new_key) > BaseCaching.MAX_ITEMS:
-                minimum = max(self.new_dict.values())
-                minimum -= 1
+                maximu = max(self.new_dict.values()) - 1
                 for key, value in self.new_dict.items():
-                    if value == minimum:
-                        minimum = key
-                index = self.new_key.index(minimum)
+                    if value == maximu:
+                        maximu = key
+                index = self.new_key.index(maximu)
                 discard = self.new_key.pop(index)
                 del self.cache_data[discard]
                 del self.new_dict[discard]
