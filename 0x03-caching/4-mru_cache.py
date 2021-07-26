@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""[summary]
+"""
+LRU Caching
+
+Classes:
+    LRUCache
+
+Functions_
+    put(object, key: string, item: string)
+    get(object, key: string)
 """
 from base_caching import BaseCaching
 
