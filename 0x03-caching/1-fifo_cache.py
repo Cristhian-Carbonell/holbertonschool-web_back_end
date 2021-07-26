@@ -36,6 +36,7 @@ class FIFOCache(BaseCaching):
         Constructs all the necessary attributes for the person object
         """
         super().__init__()
+        self.new_key = []
 
     def put(self, key, item):
         """
@@ -50,18 +51,13 @@ class FIFOCache(BaseCaching):
             corresponding key
         """
         if key is not None and item is not None:
-            if len(self.cache_data) == BaseCaching.MAX_ITEMS:
-                if key not in self.cache_data:
-                    for value in range(len(self.cache_data)):
-                        for keys in self.cache_data:
-                            if value == FIFOCache.index:
-                                self.cache_data.pop(keys)
-                                print("DISCARD: {}".format(keys))
-                                break
-
-                    FIFOCache.index += 1
-                if FIFOCache.index == 3:
-                    FIFOCache.index = 0
+            if key not in self.new_key:
+                self.new_key.append(key)
+                
+            if len(self.new_key) > BaseCaching.MAX_ITEMS:
+               discard = self.new_key.pop(0)
+               del self.cache_data[discard]
+               print("DISCARD: {}".format(discard))
 
             self.cache_data[key] = item
 
