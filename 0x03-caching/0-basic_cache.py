@@ -29,11 +29,6 @@ class BasicCache(BaseCaching):
     get(key)
         returns the dictionary cache_data value of the given key
     """
-    def __init__(self):
-        """
-        Constructs all the necessary attributes for the person object
-        """
-        super().__init__()
 
     def put(self, key, item):
         """
