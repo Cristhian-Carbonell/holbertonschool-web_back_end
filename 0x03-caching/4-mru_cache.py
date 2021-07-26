@@ -1,89 +1,47 @@
-#!/usr/bin/env python3
-"""
-MRU Caching
+#!/usr/bin/python3
+''' MRU Caching: Create a class MRUCache that inherits from BaseCaching
+                 and is a caching system
+'''
 
-Classes:
-    MRUCache
-
-Functions_
-    put(object, key: string, item: string)
-    get(object, key: string)
-"""
-from base_caching import BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """
-    class MRUCache that inherits from BaseCaching and is a caching system
+    ''' An MRU Cache.
+        Inherits all behaviors from BaseCaching except, upon any attempt to
+        add an entry to the cache when it is at max capacity (as specified by
+        BaseCaching.MAX_ITEMS), it discards the most recently used entry to
+        accommodate for the new one.
+        Attributes:
+          __init__ - method that initializes class instance
+          put - method that adds a key/value pair to cache
+          get - method that retrieves a key/value pair from cache '''
 
-    ...
-
-    Parametres
-    ----------
-    None
-
-    Methods
-    -------
-    put(key, item)
-        assigns the dictionary cache_data the value of the item for the key
-
-    get(key)
-        returns the dictionary cache_data value of the given key
-    """
     def __init__(self):
-        """
-        Constructs all the necessary attributes for the person object
-        """
+        ''' Initialize class instance. '''
         super().__init__()
-        self.new_key = []
-        self.index = ""
+        self.keys = []
 
     def put(self, key, item):
-        """
-        Assigns the dictionary cache_data the value of the item for the key
-
-        If the argument key or item is None, this method should not do anything
-
-        Parameters
-        ----------
-            key (string): key to append to dictionary
-            item (string): value to add the dictionary with its
-            corresponding key
-        """
+        ''' Add key/value pair to cache data.
+            If cache is at max capacity (specified by BaseCaching.MAX_ITEMS),
+            discard most recently used entry in cache to accommodate new
+            entry. '''
         if key is not None and item is not None:
             self.cache_data[key] = item
-
-            if key not in self.new_key:
-                self.new_key.append(key)
-
-            if len(self.new_key) > BaseCaching.MAX_ITEMS:
-                index = self.new_key.index(self.index)
-                discard = self.new_key.pop(index)
+            if key not in self.keys:
+                self.keys.append(key)
+            else:
+                self.keys.append(self.keys.pop(self.keys.index(key)))
+            if len(self.keys) > BaseCaching.MAX_ITEMS:
+                discard = self.keys.pop(-2)
                 del self.cache_data[discard]
-                print("DISCARD: {}".format(discard))
-            self.index = key
+                print('DISCARD: {:s}'.format(discard))
 
     def get(self, key):
-        """
-        Returns the dictionary cache_data value of the given key
-
-        if the argument key is None or the key doesn't exist in
-        dictionary cache_data, return None
-
-        Parameters
-        ----------
-            key (string): key that will be searched in the dictionary
-            to return the value
-
-        Returns
-        -------
-            Dictionary value if it finds the key, if not none
-        """
-        self.index = key
-        string_value = None
-        if key is None or key in self.cache_data:
-            for keys, values in self.cache_data.items():
-                if key == keys:
-                    string_value = values
-
-        return string_value
+        ''' Return value stored in `key` key of cache.
+            If key is None or does not exist in cache, return None. '''
+        if key is not None and key in self.cache_data:
+            self.keys.append(self.keys.pop(self.keys.index(key)))
+            return self.cache_data[key]
+        return None
