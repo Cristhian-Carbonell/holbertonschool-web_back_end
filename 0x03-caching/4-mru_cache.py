@@ -3,7 +3,7 @@
 MRU Caching
 
 Classes:
-    LRUCache
+    MRUCache
 
 Functions_
     put(object, key: string, item: string)
