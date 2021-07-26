@@ -29,6 +29,11 @@ class BasicCache(BaseCaching):
     get(key)
         returns the dictionary cache_data value of the given key
     """
+    def __init__(self):
+        """
+        Constructs all the necessary attributes for the person object
+        """
+        super().__init__()
 
     def put(self, key, item):
         """
@@ -42,7 +47,7 @@ class BasicCache(BaseCaching):
             item (string): value to add the dictionary with its
             corresponding key
         """
-        if key is not None or item is not None:
+        if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
@@ -61,9 +66,10 @@ class BasicCache(BaseCaching):
         -------
             Dictionary value if it finds the key, if not none
         """
-        if key is not None or key in self.cache_data:
+        string_value = None
+        if key is None and key in self.cache_data:
             for keys, values in self.cache_data.items():
                 if key == keys:
-                    return values
+                    string_value = values
 
-        return None
+        return string_value
