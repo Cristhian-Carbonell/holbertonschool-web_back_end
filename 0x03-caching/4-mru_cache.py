@@ -28,8 +28,7 @@ class MRUCache(BaseCaching):
         """
         super().__init__()
         self.new_key = []
-        self.count = 0
-        self.new_dict = {}
+        self.index = ""
 
     def put(self, key, item):
         """
@@ -43,9 +42,6 @@ class MRUCache(BaseCaching):
             item (string): value to add the dictionary with its
             corresponding key
         """
-        self.count += 1
-        self.new_dict[key] = self.count
-
         if key is not None and item is not None:
             self.cache_data[key] = item
 
@@ -53,15 +49,11 @@ class MRUCache(BaseCaching):
                 self.new_key.append(key)
 
             if len(self.new_key) > BaseCaching.MAX_ITEMS:
-                maximu = max(self.new_dict.values()) - 1
-                for key, value in self.new_dict.items():
-                    if value == maximu:
-                        maximu = key
-                index = self.new_key.index(maximu)
+                index = self.new_key.index(self.index)
                 discard = self.new_key.pop(index)
                 del self.cache_data[discard]
-                del self.new_dict[discard]
                 print("DISCARD: {}".format(discard))
+            self.index = key
 
     def get(self, key):
         """
@@ -79,9 +71,7 @@ class MRUCache(BaseCaching):
         -------
             Dictionary value if it finds the key, if not none
         """
-        self.count += 1
-        if key in self.new_dict:
-            self.new_dict[key] = self.count
+        self.index = key
         string_value = None
         if key is None or key in self.cache_data:
             for keys, values in self.cache_data.items():
