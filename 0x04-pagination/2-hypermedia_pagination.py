@@ -61,5 +61,5 @@ class Server:
         hypermedia = {'page_size': len(listpage),
                       'page': page, 'data': listpage,
                       'next_page': next_page, 'prev_page': prev_page,
-                      'total_page': total_page}
+                      'total_pages': total_page}
         return hypermedia
