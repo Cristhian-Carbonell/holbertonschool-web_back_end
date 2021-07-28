@@ -51,10 +51,12 @@ class Server:
         listpage = self.get_page(page, page_size)
         next_page = page + 1
         prev_page = page - 1
-        total_page = 19419 / page_size
-        if prev_page == 0:
+        total_page = math.ceil(19419 / page_size)
+        if prev_page != 1:
             prev_page = None
+        if page > total_page:
+            next_page = None
         hypermedia = {'page_size': page_size, 'page': page, 'data': listpage,
                       'next_page': next_page, 'prev_page': prev_page,
-                      'total_page': math.ceil(total_page)}
+                      'total_page': total_page}
         return hypermedia
