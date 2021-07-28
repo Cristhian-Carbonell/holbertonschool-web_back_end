@@ -65,10 +65,10 @@ class Server:
                 return list()
             datareader = csv.reader(csvfile)
             dataset = []
-            line_count = 0
+            line_count = 0 - 1
             for row in datareader:
-                if line_count == 0:
-                    line_count = 1
+                if line_count < page:
+                    line_count += 1
                     continue
                 if page == page_size:
                     break
