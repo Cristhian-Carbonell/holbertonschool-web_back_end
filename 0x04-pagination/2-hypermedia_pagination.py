@@ -46,7 +46,7 @@ class Server:
         except IndexError:
             return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """"""
         listpage = self.get_page(page, page_size)
         next_page = page + 1
@@ -56,7 +56,8 @@ class Server:
             prev_page = None
         if page > total_page:
             next_page = None
-        hypermedia = {'page_size': len(listpage), 'page': page, 'data': listpage,
+        hypermedia = {'page_size': len(listpage),
+                      'page': page, 'data': listpage,
                       'next_page': next_page, 'prev_page': prev_page,
                       'total_page': total_page}
         return hypermedia
