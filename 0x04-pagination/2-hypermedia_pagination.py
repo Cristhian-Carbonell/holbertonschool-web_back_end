@@ -51,13 +51,9 @@ class Server:
         _page and returns a dictionary containing the following key-value
         pairs:"""
         listpage = self.get_page(page, page_size)
-        next_page = page + 1
-        prev_page = page - 1
         total_page = math.ceil(len(self.dataset()) / page_size)
-        if page == 1:
-            prev_page = None
-        if page > total_page:
-            next_page = None
+        next_page = page + 1 if page < total_page else None
+        prev_page = page - 1 if page != 1 else None
         hypermedia = {'page_size': len(listpage),
                       'page': page, 'data': listpage,
                       'next_page': next_page, 'prev_page': prev_page,
