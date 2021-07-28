@@ -10,10 +10,10 @@ Functions:
     get_page(object, integer, integer) -> list(list)
     index_range(integer, integer) -> tuple(integer, integer)
 """
-index_range = __import__('0-simple_helper_function').index_range
 import csv
 import math
 from typing import List
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
