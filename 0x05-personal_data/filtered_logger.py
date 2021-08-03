@@ -28,10 +28,26 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """Constructor Method
+
+        Args:
+            fields (List[str]): accept a list of strings
+            fields constructor argument
+        """
         self.fields = fields
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
+        """format method
+
+        filter values in incoming log records using filter_datum.
+
+        Args:
+            record (logging.LogRecord):
+
+        Returns:
+            str:
+        """
         NotImplementedError
         return filter_datum(self.fields, self.REDACTION,
                             super(RedactingFormatter, self).format(record),
