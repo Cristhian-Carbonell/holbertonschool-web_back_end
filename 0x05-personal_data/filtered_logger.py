@@ -20,6 +20,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                          index + "=" + redaction + separator, message)
     return message
 
+
 def get_logger() -> logging.Logger:
     """returns a logging.Logger object
     """
@@ -32,6 +33,7 @@ def get_logger() -> logging.Logger:
     logger.addHandler(c_handler)
 
     return logger
+
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
