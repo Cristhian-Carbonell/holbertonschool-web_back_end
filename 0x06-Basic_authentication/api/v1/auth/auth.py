@@ -17,6 +17,16 @@ class Auth:
         Returns:
             False
         """
+        if path is None:
+            return True
+        if excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        copy = excluded_paths[0]
+        if path in excluded_paths or path in copy:
+            return False
+        else:
+            return True
+
         return False
 
     def authorization_header(self, request=None) -> str:
