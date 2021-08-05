@@ -14,7 +14,7 @@ class BasicAuth(Auth):
             return None
         if type(authorization_header) is not str:
             return None
-        if "Basic" not in authorization_header:
+        if "Basic " not in authorization_header:
             return None
         for i in range(len(authorization_header)):
             if authorization_header[i] == " ":
