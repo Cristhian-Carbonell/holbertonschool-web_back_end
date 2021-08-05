@@ -4,6 +4,7 @@ from api.v1.auth.auth import Auth
 import base64
 from typing import TypeVar
 from api.v1.views.users import User
+from api.v1.auth.auth import Auth
 
 
 class BasicAuth(Auth):
@@ -76,3 +77,15 @@ class BasicAuth(Auth):
                 return user
 
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """retrieves the User instance for a request:
+        """
+        authorization = Auth()
+        requests = authorization.authorization_header(request)
+        extract = self.extract_base64_authorization_header(requests)
+        decode = self.decode_base64_authorization_header(extract)
+        extract_user = self.extract_user_credentials(decode)
+        user_object = self.user_object_from_credentials(extract_user[0],
+                                                        extract_user[1])
+        return user_object
