@@ -3,6 +3,6 @@
 from api.v1.auth.auth import Auth
 
 
-class Basic_auth(Auth):
+class BasicAuth(Auth):
     """class"""
     pass
