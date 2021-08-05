@@ -44,7 +44,8 @@ def error_forbidden(error) -> str:
 
 @app.before_request
 def before_request() -> str:
-    """"""
+    """Method before_request
+    """
     if auth is not None:
         if not auth.require_auth(request.path, ['/api/v1/status/',
                                                 '/api/v1/unauthorized/',
