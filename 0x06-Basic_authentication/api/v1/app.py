@@ -19,7 +19,9 @@ AUTH_TYPE = getenv('AUTH_TYPE')
 if AUTH_TYPE == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
-
+if AUTH_TYPE == "basic_auth":
+    from api.v1.auth.basic_auth import Basic_auth
+    auth = Basic_auth()
 
 @app.errorhandler(404)
 def not_found(error) -> str:
