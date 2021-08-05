@@ -18,6 +18,6 @@ class BasicAuth(Auth):
             return None
         for i in range(len(authorization_header)):
             if authorization_header[i] == " ":
-                return authorization_header[i+1:-1]
+                encode = authorization_header[i+1:-1]
 
-        return None
+        return encode
