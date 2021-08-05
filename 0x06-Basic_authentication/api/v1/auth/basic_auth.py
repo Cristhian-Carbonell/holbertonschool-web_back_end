@@ -16,8 +16,8 @@ class BasicAuth(Auth):
             return None
         if "Basic" not in authorization_header:
             return None
-        else:
-            for i in range(len(authorization_header)):
-                if authorization_header[i] == " ":
-                    return authorization_header[i+1:-1]
+        for i in range(len(authorization_header)):
+            if authorization_header[i] == " ":
+                return authorization_header[i+1:-1]
+
         return None
