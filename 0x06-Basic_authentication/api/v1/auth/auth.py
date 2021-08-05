@@ -21,13 +21,13 @@ class Auth:
             return True
         if excluded_paths is None or len(excluded_paths) == 0:
             return True
-        copy = excluded_paths[0]
-        if path in excluded_paths or path in copy:
+        if path[-1] != '/':
+            path += '/'
+        if excluded_paths[-1] != '/':
+            excluded_paths += '/'
+        if path in excluded_paths:
             return False
-        else:
-            return True
-
-        return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """public method authorization_header
