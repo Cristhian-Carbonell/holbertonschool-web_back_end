@@ -15,7 +15,7 @@ class Auth:
         """public method require_auth
 
         Returns:
-            False
+            False or True
         """
         if path is None:
             return True
@@ -35,7 +35,9 @@ class Auth:
         Returns:
             None
         """
-        return None
+        if request is None:
+            return None 
+        return request.header.get("Authorization", None)
 
     def current_user(self, request=None) -> TypeVar('User'):
         """public method current_user
