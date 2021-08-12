@@ -53,18 +53,17 @@ def error_forbidden(error) -> str:
 def before_request() -> str:
     """Method before_request
     """
+    url_path = ['/api/v1/status/',
+                '/api/v1/unauthorized/',
+                '/api/v1/forbidden/',
+                '/api/v1/auth_session/login/']
     if auth is not None:
-        if not auth.require_auth(request.path, ['/api/v1/status/',
-                                                '/api/v1/unauthorized/',
-                                                '/api/v1/forbidden/',
-                                                '/api/v1/auth_session/login/']):
+        if not auth.require_auth(request.path, url_path):
             return
-        if auth.authorization_header(request) is None:
+        if auth.authorization_header(request) and auth.session_cookie(request):
             abort(401)
         if auth.current_user(request) is None:
             abort(403)
-        if auth.authorization_header(request) and auth.session_cookie(request):
-            abort(401)
         request.current_user = auth.current_user(request)
     else:
         return
