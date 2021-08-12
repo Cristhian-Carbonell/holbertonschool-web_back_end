@@ -53,4 +53,6 @@ class Auth:
         if request is None:
             return None
         SESSION_NAME = "_my_session_id"
-        return request.cookies.get(SESSION_NAME)
+        SESSION_NAME = request.cookies.get(SESSION_NAME)
+        print(SESSION_NAME)
+        return SESSION_NAME
