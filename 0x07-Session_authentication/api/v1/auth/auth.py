@@ -46,3 +46,11 @@ class Auth:
             None
         """
         return None
+
+    def session_cookie(self, request=None) -> str:
+        """public method session_cookie
+        """
+        if request is None:
+            return None
+        SESSION_NAME = request.cookies.get("_my_session_id")
+        return SESSION_NAME
