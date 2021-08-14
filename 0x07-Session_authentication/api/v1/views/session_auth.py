@@ -22,17 +22,13 @@ def session_id():
     if password is None or password == "":
         return jsonify({"error": "password missing"}), 400
 
-    try:
-        foundUsers = User.search({'email': email})
-    except Exception:
-        return jsonify({"error": "no user found for this email"}), 404
+    foundUsers = User.search({'email': email})
     if not foundUsers:
         return jsonify({"error": "no user found for this email"}), 404
 
     for user in foundUsers:
-        valid_passwd = user.is_valid_password(password)
-    if valid_passwd is False:
-        return jsonify({"error": "wrog password"}), 401
+        if not user.is_valid_password(password):
+            return jsonify({"error": "wrog password"}), 401
 
     session_id = auth.create_session(user.id)
     SESSION_NAME = getenv("SESSION_NAME")
