@@ -13,7 +13,7 @@ class SessionExpAuth(SessionAuth):
         """constructor method
         """
         self.session_duration = int(getenv("SESSION_DURATION"))
-        if not self.session_duration or not \
+        if self.session_duration == None or not \
                 isinstance(self.session_duration, int):
             self.session_duration = 0
 
