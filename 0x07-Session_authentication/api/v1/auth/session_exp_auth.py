@@ -12,10 +12,10 @@ class SessionExpAuth(SessionAuth):
     def __init__(self):
         """constructor method
         """
-        self.session_duration = int(getenv("SESSION_DURATION"))
-        if self.session_duration == None or not \
-                isinstance(self.session_duration, int):
-            self.session_duration = 0
+        try:
+            self.session_duration = int(getenv("SESSION_DURATION", 0))
+        except ValueError:
+            print(self.session_duration)
 
     def create_session(self, user_id=None):
         """create session method
