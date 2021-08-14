@@ -22,7 +22,10 @@ def session_id():
     if password is None or password == "":
         return jsonify({"error": "password missing"}), 400
 
-    foundUsers = User.search({'email': email})
+    try:
+        foundUsers = User.search({'email': email})
+    except Exception:
+        return jsonify({"error": "no user found for this email"}), 404
     if not foundUsers:
         return jsonify({"error": "no user found for this email"}), 404
 
