@@ -15,7 +15,7 @@ class SessionExpAuth(SessionAuth):
         try:
             self.session_duration = int(getenv("SESSION_DURATION", 0))
         except ValueError:
-            print(self.session_duration)
+            self.session_duration = 0
 
     def create_session(self, user_id=None):
         """create session method
@@ -23,8 +23,8 @@ class SessionExpAuth(SessionAuth):
         session_id = super().create_session(user_id)
         if not session_id:
             return None
-        session_dictionary = self.user_id_by_session_id[session_id]
-        session_dictionary = {
+
+        SessionExpAuth.user_id_by_session_id[session_id] = {
             'user_id': user_id,
             'created_at': datetime.now()
         }
@@ -36,13 +36,20 @@ class SessionExpAuth(SessionAuth):
         """
         if session_id is None:
             return None
-        if "session_id" not in self.user_id_by_session_id:
+        session_dictionary = SessionExpAuth.user_id_by_session_id.get(
+            session_id, None
+        )
+        if session_dictionary is None:
             return None
-        if self.session_duration == 0:
-            return self.session_dictionary[session_id]["user_id"]
-        if "created_at" not in self.session_dictionary:
+        if self.session_duration <= 0:
+            return session_dictionary.get("user_id")
+        if "created_at" not in session_dictionary:
             return None
-        if timedelta(self.created_at, self.session_duration) < datetime.now():
+        created_at = session_dictionary.get("created_at")
+        session_length = timedelta(seconds=self.session_duration)
+        expiry_time = created_at + session_length
+        
+        if expiry_time < datetime.now():
             return None
 
-        return self.session_dictionary[session_id]["user_id"]
+        return session_dictionary.get("user_id")
