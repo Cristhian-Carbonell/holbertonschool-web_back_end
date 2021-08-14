@@ -48,7 +48,7 @@ class SessionExpAuth(SessionAuth):
         created_at = session_dictionary.get("created_at")
         session_length = timedelta(seconds=self.session_duration)
         expiry_time = created_at + session_length
-        
+
         if expiry_time < datetime.now():
             return None
 
