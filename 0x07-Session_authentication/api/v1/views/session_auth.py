@@ -27,8 +27,9 @@ def session_id():
         return jsonify({"error": "no user found for this email"}), 404
 
     for user in foundUsers:
-        if not user.is_valid_password(password):
-            return jsonify({"error": "wrog password"}), 401
+        valid_passwd = user.is_valid_password(password)
+    if valid_passwd is False:
+        return jsonify({"error": "wrong password"}), 401
 
     session_id = auth.create_session(user.id)
     SESSION_NAME = getenv("SESSION_NAME")
