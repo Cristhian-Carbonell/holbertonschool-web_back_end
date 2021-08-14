@@ -2,7 +2,7 @@
 """Module of session_id views
 """
 from api.v1.views import app_views
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from models.user import User
 from os import getenv
 
@@ -37,3 +37,18 @@ def session_id():
     response.set_cookie(SESSION_NAME, session_id)
 
     return response
+
+
+@app_views.route('/auth_session/login', methods=['DELETE'],
+                 strict_slashes=False)
+def destroy_logout():
+    """ DELETE /api/v1/auth_session/logout
+    Return:
+      - deletes the user session/logout
+    """
+    from api.v1.app import auth
+    destroy = auth.destroy_session(request)
+    if not destroy:
+        abort(404)
+
+    return jsonify({}), 200
