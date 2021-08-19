@@ -73,7 +73,8 @@ class DB:
                 raise ValueError
 
         locate_user = self.find_user_by(id=user_id)
+
         for key, value in kwargs.items():
-            locate_user.key = value
-        
+            setattr(locate_user, key, value)
+
         self._session.commit()
