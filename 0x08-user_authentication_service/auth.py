@@ -3,7 +3,6 @@
 """
 import bcrypt
 import base64
-from typing import bytes
 
 
 def _hash_password(password: str) -> bytes:
