@@ -14,7 +14,7 @@ from user import User
 
 
 class DB:
-    """DB class
+    """DB class for Object Reational Mappin
     """
 
     def __init__(self):
