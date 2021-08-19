@@ -3,9 +3,10 @@
 """
 import bcrypt
 import base64
+from typing import bytes
 
 
-def _hash_password(password: str):
+def _hash_password(password: str) -> bytes:
     """returns bytes.
     """
     encoded = password.encode('utf-8')
