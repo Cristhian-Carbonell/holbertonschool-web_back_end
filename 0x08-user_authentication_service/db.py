@@ -28,7 +28,6 @@ class DB:
         """Memoized session object
         """
         if self.__session is None:
-            print("ingresa")
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
