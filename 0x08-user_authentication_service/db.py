@@ -63,7 +63,7 @@ class DB:
 
         return self._session.query(User).filter_by(**kwargs).one()
 
-    def update_user(self, user_id: int, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """locate the user to update
         """
         locate_user = self.find_user_by(id=user_id)
