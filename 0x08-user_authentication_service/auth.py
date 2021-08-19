@@ -2,7 +2,6 @@
 """auth module
 """
 import bcrypt
-import base64
 
 
 def _hash_password(password: str) -> bytes:
