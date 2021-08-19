@@ -74,5 +74,3 @@ class DB:
 
         locate_user = self.find_user_by(id=user_id)
         locate_user.hashed_password = kwargs.values()
-
-        return None
