@@ -64,11 +64,14 @@ class DB:
         return self._session.query(User).filter_by(**kwargs).one()
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """The method will use find_user_by to locate the user
-        to update, then will update the user’s attributes as
-        passed in the method’s arguments then commit changes
-        to the database.
+        """locate the user to update
         """
+        column_name = User.__table__.columns.keys()
+
+        for key in kwargs.keys():
+            if key not in column_name:
+                raise ValueError
+
         locate_user = self.find_user_by(id=user_id)
         locate_user.hashed_password = kwargs.values()
 
