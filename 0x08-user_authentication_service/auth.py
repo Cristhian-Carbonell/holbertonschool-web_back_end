@@ -7,6 +7,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import bcrypt
 from flask import request
+import uuid
 
 
 def _hash_password(password: str) -> bytes:
@@ -48,3 +49,8 @@ class Auth:
             return False
 
         return False
+
+    def _generate_uuid(self):
+        """return a string representation of a new UUID
+        """
+        return uuid.uuid4()
