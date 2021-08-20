@@ -3,6 +3,7 @@
 """
 from flask import Flask, jsonify, request, abort, make_response
 from auth import Auth
+import requests
 
 
 app = Flask(__name__)
@@ -40,10 +41,11 @@ def login():
         abort(401)
 
     session = AUTH.create_session(email)
-    response = make_response()
-    response.set_cookie("session_id", session)
+    response = make_response("")
+    response = jsonify({"email": email, "message": "logged in"})
+    response.set_cookie('session_id', session)
 
-    return jsonify({"email": email, "message": "logged in"})
+    return response
 
 
 if __name__ == "__main__":
