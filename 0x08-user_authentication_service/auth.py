@@ -50,7 +50,7 @@ class Auth:
 
         return False
 
-    def _generate_uuid(self):
+    def _generate_uuid(self) -> uuid:
         """return a string representation of a new UUID
         """
-        return uuid.uuid1()
+        return uuid.uuid4()
