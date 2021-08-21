@@ -58,7 +58,7 @@ def logout():
     if user is None:
         abort(403)
     destroy_session = AUTH.destroy_session(user.id)
-    response = requests.get("http://10.42.0.181:5000/")
+    response = requests.post("http://10.42.0.181:5000/sessions")
 
 
 if __name__ == "__main__":
