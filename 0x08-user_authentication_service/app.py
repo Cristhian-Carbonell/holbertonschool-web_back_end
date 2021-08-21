@@ -2,6 +2,7 @@
 """basic Flask app
 """
 from flask import Flask, jsonify, request, abort, make_response
+from flask.globals import session
 from auth import Auth
 import requests
 
@@ -46,6 +47,16 @@ def login():
     response.set_cookie('session_id', session)
 
     return response
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """Log out
+    """
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    destroy_session = AUTH.destroy_session(user.id)
+    response = requests.get("http://10.42.0.181:5000/")
 
 
 if __name__ == "__main__":
