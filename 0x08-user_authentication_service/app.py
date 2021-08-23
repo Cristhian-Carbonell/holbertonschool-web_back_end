@@ -3,6 +3,7 @@
 """
 from flask import Flask, jsonify, request, abort, make_response
 from flask.globals import session
+from werkzeug.utils import redirect
 from auth import Auth
 import requests
 
@@ -58,7 +59,53 @@ def logout():
     if user is None:
         abort(403)
     destroy_session = AUTH.destroy_session(user.id)
-    response = requests.post("http://10.42.0.181:5000/sessions")
+    return.redirect("/")
+
+
+@app.route('/profile', methods=['GET'], strict_slashes=False)
+def profile():
+    """response to the GET /profile
+    """
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if user:
+        return jsonify({"email": user.email}), 200
+    else:
+        abort(403)    
+
+
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def reset_password():
+    """generate token and respond with a 200 HTTP status
+    """
+    try:
+        email = request.form.get('email')
+    except KeyError:
+        abort(403)
+    try:
+        reset = AUTH.reset_password(email)
+    except ValueError:
+        abort(403)
+
+    return jsonify({"email": email, "reset_token": reset}), 200
+
+
+@app.route('/reset_password', methods=['PUT'], strict_slashes=False)
+def reset_password():
+    """Update password
+    """
+    try:
+        email = request.form.get('email')
+        reset_token = request.form.get('reset_token')
+        new_password = request.form.get('new_password')
+    except KeyError:
+        abort(400)
+    try:
+        AUTH.update_password(reset_token, new_password)
+    except ValueError:
+        abort(403)
+
+    return jsonify({"email": email, "message":"Password updated"}), 200
 
 
 if __name__ == "__main__":
