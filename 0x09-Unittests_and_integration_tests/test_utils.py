@@ -62,7 +62,7 @@ class TestMemoize(unittest.TestCase):
             result_1 = mock_memoize.a_property()
             result_2 = mock_memoize.a_property()
             result_3 = mock_memoize.a_method()
-            self.assertEqual(result_1, result_2)
+        self.assertEqual(result_1, result_2)
 
 
 class TestClass:
