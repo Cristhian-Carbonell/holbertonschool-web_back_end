@@ -14,5 +14,8 @@ class Config:
     """
     LANGUAGES = ["en", "fr"]
 
-    app.config['BABEL_DEFAULT_LOCALE'] = 'en'
-    app.config['BABEL_DEFAULT_TIMEZONE'] = 'UTC'
+    @babel.localeselector
+    def get_locale():
+        """get locale method
+        """
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
