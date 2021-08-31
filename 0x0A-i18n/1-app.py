@@ -22,7 +22,8 @@ app.config.from_object('1-app.Config')
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
-    """"""
+    """an index.html template
+    """
     return render_template('1-index.html')
 
 
