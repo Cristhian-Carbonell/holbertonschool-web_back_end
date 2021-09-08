@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Top students
 """
-from bson.son import SON
 
 
 def top_students(mongo_collection):
