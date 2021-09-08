@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Top students 
+"""Top students
 """
 from bson.son import SON
 
@@ -7,7 +7,7 @@ from bson.son import SON
 def top_students(mongo_collection):
     """function that returns all students sorted by average score
     """
-    
+
     pipeline = [
         {
             "$project": {
