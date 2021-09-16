@@ -5,7 +5,7 @@ const promiseUser = createUser();
 
 export default function handleProfileSignup() {
   const promises = [promisePhoto, promiseUser];
-  Promise.all(promises)
+  return Promise.all(promises)
     .then((results) => {
       console.log(results[0].body + " " + results[1].firstName + " " + results[1].lastName);
     })
