@@ -6,8 +6,8 @@ export default function cleanSet(set, startString) {
     return '';
   }
   for (const iterator of set) {
-    if (iterator.startsWith(startString)) {
-      word.push(iterator.slice(startString.length, iterator.length));
+    if (iterator && iterator.startsWith(startString)) {
+      word.push(iterator.slice(startString.length));
     }
   }
 
