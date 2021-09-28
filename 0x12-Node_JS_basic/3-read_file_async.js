@@ -22,10 +22,13 @@ module.exports = function countStudents(path) {
         }
       }
       delete obj.field;
+      const response = [];
       for (const key of Object.keys(obj)) {
-        console.log(`Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`);
+        const message = `Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`;
+        console.log(message);
+        response.push(message);
       }
-      resolve(1);
+      resolve(response);
     });
   });
 };
