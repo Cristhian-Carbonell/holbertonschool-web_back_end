@@ -2,15 +2,18 @@ const fs = require('fs');
 
 module.exports = function countStudents(path) {
   let readFile;
+
   try {
     readFile = fs.readFileSync(path);
   } catch (e) {
     throw new Error('Cannot load the database');
   }
+
   readFile = readFile.toString().split('\n');
-  const students = readFile.map((value) => value.split(','));
-  const NUMBER_OF_STUDENTS = students.length ? students.length - 1 : 0;
-  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
+  let students = readFile.filter((value) => value);
+  students = students.map((value) => value.split(','));
+
+  console.log(`Number of students: ${students.length - 1}`);
   const obj = {};
   for (const line in students) {
     if (line !== 0) {
