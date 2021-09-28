@@ -9,7 +9,8 @@ module.exports = function countStudents(path) {
   }
   readFile = readFile.toString().split('\n');
   const students = readFile.map((value) => value.split(','));
-  console.log(`Number of students: ${students.length - 1}`);
+  const NUMBER_OF_STUDENTS = students.length ? students.length - 1 : 0;
+  console.log(`Number of students: ${NUMBER_OF_STUDENTS}`);
   const obj = {};
   for (const line in students) {
     if (line !== 0) {
