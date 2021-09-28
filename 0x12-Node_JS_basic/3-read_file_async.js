@@ -1,11 +1,11 @@
 const fs = require('fs');
-const util = require('util')
 
 module.exports = function countStudents(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf-8', (error, data) => {
       if (error) {
-        return reject(Error('Cannot load the database'));
+        reject(Error('Cannot load the database'));
+        return;
       }
       const readFile = data.toString().split('\n');
       let students = readFile.filter((value) => value);
@@ -25,7 +25,7 @@ module.exports = function countStudents(path) {
       for (const key of Object.keys(obj)) {
         console.log(`Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`);
       }
-      resolve(1)
+      resolve(1);
     });
   });
 };
