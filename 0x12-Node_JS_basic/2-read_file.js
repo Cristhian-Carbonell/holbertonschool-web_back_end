@@ -8,8 +8,8 @@ module.exports = function countStudents(path) {
     throw new Error('Cannot load the database');
   }
   readFile = readFile.toString().split('\n');
-  let students = readFile.map((value) => value.split(','));
-  console.log(`Number of students: ${students.length - 1}`)
+  const students = readFile.map((value) => value.split(','));
+  console.log(`Number of students: ${students.length - 1}`);
   const obj = {};
   for (const line in students) {
     if (line !== 0) {
@@ -21,6 +21,6 @@ module.exports = function countStudents(path) {
   }
   delete obj.field;
   for (const key of Object.keys(obj)) {
-    console.log(`Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`,);
+    console.log(`Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`);
   }
-}
+};
