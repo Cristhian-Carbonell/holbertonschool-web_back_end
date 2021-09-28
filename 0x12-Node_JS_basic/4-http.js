@@ -3,7 +3,8 @@ const app = require('http');
 const port = 1245;
 
 app.createServer((req, res) => {
-  res.end('Hello Holberton School!');
+  res.write('Hello Holberton School!');
+  res.end();
 }).listen(port);
 
 module.exports = { app };
