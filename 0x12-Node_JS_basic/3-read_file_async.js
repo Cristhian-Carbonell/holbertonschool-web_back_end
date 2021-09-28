@@ -10,8 +10,11 @@ module.exports = function countStudents(path) {
       const readFile = data.toString().split('\n');
       let students = readFile.filter((value) => value);
       students = students.map((value) => value.split(','));
-
-      console.log(`Number of students: ${students.length - 1}`);
+      const response = [];
+      let message;
+      message = `Number of students: ${students.length - 1}`;
+      console.log(message);
+      response.push(message);
       const obj = {};
       for (const line in students) {
         if (line !== 0) {
@@ -22,9 +25,9 @@ module.exports = function countStudents(path) {
         }
       }
       delete obj.field;
-      const response = [];
+
       for (const key of Object.keys(obj)) {
-        const message = `Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`;
+        message = `Number of students in ${key}: ${obj[key].length}. List: ${obj[key].join(', ')}`;
         console.log(message);
         response.push(message);
       }
