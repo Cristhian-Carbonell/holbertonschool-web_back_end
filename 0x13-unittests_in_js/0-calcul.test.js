@@ -8,4 +8,9 @@ describe('calculateNumber', function() {
     assert.equal(calculateNumber(1.2, 3.7), 5);
     assert.equal(calculateNumber(1.5, 3.7), 6);
   });
+  it('should round a and b and return the sum of it ', function() {
+    assert.notEqual(calculateNumber('fuction', 3.7), 5);
+    assert.notEqual(calculateNumber(1, 'fuction'), 4);
+    assert.notEqual(calculateNumber('fuction', 'fuction'), 5);
+  });
 });
