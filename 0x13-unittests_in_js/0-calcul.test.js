@@ -7,6 +7,9 @@ describe('calculateNumber', function() {
     assert.equal(calculateNumber(1, 3), 4);
     assert.equal(calculateNumber(1.2, 3.7), 5);
     assert.equal(calculateNumber(1.5, 3.7), 6);
+    assert.equal(calculateNumber('1.5', 3.7), undefined);
+    assert.equal(calculateNumber(1.5, '3.7'), undefined);
+    assert.equal(calculateNumber('1.5', '3.7'), undefined);
   });
   it('should round a and b and return the sum of it ', function() {
     assert.notEqual(calculateNumber('fuction', 3.7), 5);
@@ -14,8 +17,8 @@ describe('calculateNumber', function() {
     assert.notEqual(calculateNumber('fuction', 'fuction'), 5);
   });
   it('should round a and b and return the sum of it ', function() {
-    assert.deepStrictEqual(calculateNumber(false, false), 0);
-    assert.deepStrictEqual(calculateNumber(true, false), 1);
-    assert.deepStrictEqual(calculateNumber(true, true), 2);
+    assert.deepStrictEqual(calculateNumber(false, false), undefined);
+    assert.deepStrictEqual(calculateNumber(true, false), undefined);
+    assert.deepStrictEqual(calculateNumber(true, true), undefined);
   });
 });
