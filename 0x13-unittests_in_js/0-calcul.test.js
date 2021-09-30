@@ -13,4 +13,9 @@ describe('calculateNumber', function() {
     assert.notEqual(calculateNumber(1, 'fuction'), 4);
     assert.notEqual(calculateNumber('fuction', 'fuction'), 5);
   });
+  it('should round a and b and return the sum of it ', function() {
+    assert.deepStrictEqual(calculateNumber(false, false), 0);
+    assert.deepStrictEqual(calculateNumber(true, false), 1);
+    assert.deepStrictEqual(calculateNumber(true, true), 2);
+  });
 });
